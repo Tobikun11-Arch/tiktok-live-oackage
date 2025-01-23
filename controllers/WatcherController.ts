@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { WebcastPushConnection } from 'tiktok-live-connector';
 
-
 export const Get_Comments = async (req: Request, res: Response) => {
     const tiktokUsername = 'tobikun11'; //change this to your username
     const tiktokConnection = new WebcastPushConnection(tiktokUsername);
@@ -38,6 +37,10 @@ export const Get_Comments = async (req: Request, res: Response) => {
 
     tiktokConnection.on('follow', (data) => {
         console.log(data.uniqueId, "followed!");
+    })
+
+    tiktokConnection.on('roomUser', data => {
+        console.log(`Viewer Count: ${data.viewerCount}`);
     })
 
 }
